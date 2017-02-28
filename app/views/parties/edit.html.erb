@@ -1,0 +1,48 @@
+<h1>Hey there, <%=@guest%> <%= current_user.first_name%>! </h1>
+  <% if @party.guests.length > 1 %>
+    <h2>people in your party:</h2>
+
+
+      <% @party.guests.each do |guest| %>
+        <%= guest.first_name %>
+        <%= form_for guest, :remote => true, :url => { :action => "update", :controller=>"guests"}, :method=>"patch" do |f| %>
+          <div class="panel panel-default panel-body">
+            <h3>Is <%= guest.first_name %> attending?</h3>
+
+            <%= f.label :attending, "most definitely!" %>
+            <%= f.radio_button :attending, true %>
+
+            <%= f.label :attending, "no can do" %>
+            <%= f.radio_button :attending, false %>
+          </div>
+
+          <%= f.hidden_field :guest_id, value: guest.id %>
+
+        <%end%>
+
+        <!-- form for guest's meal -->
+        <%= form_for guest.meal, :remote => true, :url => { :action => "update", :controller=>"meals"}, :method=>"patch" do |f| %>
+          <div class="panel panel-default panel-body">
+            <h3>What's their chow of choice?</h3>
+
+            <%= f.label :desc, "ice cream" %>
+            <%= f.radio_button :desc, "ice cream" %>
+
+            <%= f.label :desc, "fish pie" %>
+            <%= f.radio_button :desc, "fish pie" %>
+
+            <%= f.label :desc, "bubblegum" %>
+            <%= f.radio_button :desc, "bubblegum" %>
+          </div>
+
+          <%= f.hidden_field :guest_id, value: guest.id %>
+
+        <%end%>
+
+
+        <!-- special jQuery button : submit both of these forms -->
+      <%end%>
+
+      <button type="submit" name="Submit" id="<%= @party.id %>-rsvp-submit" class="rsvp-submit">Submit!</button>
+
+<%end %>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lisa & David</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <%= javascript_include_tag 'application' %>
+   <script src="https://use.fontawesome.com/ab1ae4c50b.js"></script>
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.0.0/ekko-lightbox.css"></script> -->
+   <link href="https://fonts.googleapis.com/css?family=Satisfy|Quattrocento|Quicksand" rel="stylesheet">
+   <script src="/assets/javascripts/jquery.ui.touch-punch.min.js"></script>
+   <meta name="viewport" content="width=device-width" />
+  <%= csrf_meta_tags %>
+ <script>
+
+        window.addEventListener("beforeunload", function () {
+  $('.animate-in').classList.add("animate-out");
+});
+
+$(document).ready(function(){
+if (/Mobi/.test(navigator.userAgent)) {
+    $('.fourth').css('display','none');
+    $('.tag').css('margin-right', '4em');
+}
+});
+
+  </script>
+</head>
+<body>
+
+    <nav class="navbar navbar-default homenav">
+    <div class="container-nav">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+         </div><!--navbar-header-->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav nav-det">
+          <li class="tag">6.16.2018<br>Groton, MA</li>
+           <li class="first <%=' first-active' if current_page?('/')%>"><%=link_to '<i class="fa fa-home" aria-hidden="true"></i><br>home'.html_safe, root_path%></a>
+           <li class="second <%='second-active' if current_page?('/pages/location')%>"><%= link_to '<i class="fa fa-paper-plane-o" aria-hidden="true"></i><br>go'.html_safe, page_path('location') %></li>
+           <li class="third <%='third-active' if current_page?('/pages/hotels')%>"><%=link_to '<i class="fa fa-bed" aria-hidden="true"></i><br>stay'.html_safe, page_path('hotels') %></li>
+           <li class="fourth <%='fourth-active' if current_page?('/pages/game')%>"><%= link_to '
+<i class="fa fa-clone" aria-hidden="true"></i><br>play'.html_safe, page_path('game') %></li>
+<li class="fifth <%= ' fifth-active' if current_page?('/pages/info')%>"><%= link_to '<i class="fa fa-heart-o" aria-hidden="true"></i><br>the big day'.html_safe, page_path('info') %></li>
+          <li class="sixth <%= 'sixth-active' if current_page?('/pages/about')%>"><%= link_to '<i class="fa fa-hand-peace-o" aria-hidden="true"></i><br>Davey/Leesy'.html_safe, page_path('about') %></li>
+          <li class="seventh <%=' seventh-active' if current_page?('/pages/registry')%>"><%= link_to '<i class="fa fa-gift" aria-hidden="true"></i><br>registry'.html_safe, page_path('registry') %></li>
+          <li class="eighth" style="display:none;" <%= 'eighth-active' if current_page?('/login')%>"><%= link_to  '<i class="fa fa-envelope-o" aria-hidden="true"></i><br>rsvp'.html_safe, '/login' %></li>
+
+        </ul>
+      </div><!--collapse-->
+
+    </div><!--container-->
+  </nav>
+
+<div class="animate-in">
+<%= yield %>
+</div>
+</body>
+</html>
